@@ -7,78 +7,27 @@
                         <div class="binduz-er-top-news-title">
                             <h3 class="binduz-er-title">Latest News</h3>
                         </div>
-                        <div class="binduz-er-latest-news-item">
+                        <div class="binduz-er-latest-news-item"
+                        v-for="news in lastNews.slice(0, 4)" :key="news">
                             <div class="binduz-er-thumb">
-                                <img src="../assets/images/latest-news-thumb-1.jpg" alt="">
+                                <img :src="news.urlToImage" alt="">
                             </div>
                             <div class="binduz-er-content">
                                 <div class="binduz-er-meta-categories">
                                     <a href="#">Technology</a>
                                 </div>
-                                <h5 class="binduz-er-title"><a href="#">How you'll find accurate and timely information on COVID-19 vaccines How you'll find accurate and timely  </a></h5>
+                                <h5 class="binduz-er-title">
+                                    <a href="#">{{news.title}}</a>
+                                </h5>
                                 <div class="binduz-er-meta-item">
                                     <div class="binduz-er-meta-author">
-                                        <span>By <span>Miranda H. Halim</span></span>
+                                        <span>By <span>{{news.author}}</span></span>
                                     </div>
                                     <div class="binduz-er-meta-date">
-                                        <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="binduz-er-latest-news-item">
-                            <div class="binduz-er-thumb">
-                                <img src="../assets/images/latest-news-thumb-2.jpg" alt="">
-                            </div>
-                            <div class="binduz-er-content">
-                                <div class="binduz-er-meta-categories">
-                                    <a href="#">Technology</a>
-                                </div>
-                                <h5 class="binduz-er-title"><a href="#">Organizing the world’s information: where does it all come from? the world’s information: where does it</a></h5>
-                                <div class="binduz-er-meta-item">
-                                    <div class="binduz-er-meta-author">
-                                        <span>By <span>Miranda H. Halim</span></span>
-                                    </div>
-                                    <div class="binduz-er-meta-date">
-                                        <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="binduz-er-latest-news-item">
-                            <div class="binduz-er-thumb">
-                                <img src="../assets/images/latest-news-thumb-3.jpg" alt="">
-                            </div>
-                            <div class="binduz-er-content">
-                                <div class="binduz-er-meta-categories">
-                                    <a href="#">Technology</a>
-                                </div>
-                                <h5 class="binduz-er-title"><a href="#">New Cook County Circuit Court clerk want to leave her predecessor’s era behind, in on updating the nation’s secondt.</a></h5>
-                                <div class="binduz-er-meta-item">
-                                    <div class="binduz-er-meta-author">
-                                        <span>By <span>Miranda H. Halim</span></span>
-                                    </div>
-                                    <div class="binduz-er-meta-date">
-                                        <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="binduz-er-latest-news-item">
-                            <div class="binduz-er-thumb">
-                                <img src="../assets/images/latest-news-thumb-4.jpg" alt="">
-                            </div>
-                            <div class="binduz-er-content">
-                                <div class="binduz-er-meta-categories">
-                                    <a href="#">Technology</a>
-                                </div>
-                                <h5 class="binduz-er-title"><a href="#">The new conversational Search experience we’re thankful for The new conversational Search experience we’re thankful for</a></h5>
-                                <div class="binduz-er-meta-item">
-                                    <div class="binduz-er-meta-author">
-                                        <span>By <span>Miranda H. Halim</span></span>
-                                    </div>
-                                    <div class="binduz-er-meta-date">
-                                        <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
+                                        <span>
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            {{news.publishedAt.slice(0, 10)}}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -91,10 +40,7 @@
                         <div class="binduz-er-video-post">
                             <div class="binduz-er-latest-news-item">
                                 <div class="binduz-er-thumb">
-                                    <img src="../assets/images/latest-news-thumb-4.jpg" alt="">
-                                    <div class="binduz-er-play">
-                                        <a class="binduz-er-video-popup" href="#"><i class="fas fa-play"></i></a>
-                                    </div>
+                                    <iframe width="100%" height="" src="https://www.youtube.com/embed/IrgGmaeYmdM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                                 <div class="binduz-er-content">
                                     <div class="binduz-er-meta-item">
@@ -102,18 +48,20 @@
                                             <a href="#">Technology</a>
                                         </div>
                                         <div class="binduz-er-meta-date">
-                                            <span><i class="fal fa-calendar-alt"></i>24th February 2020</span>
+                                            <span>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                24th February 2020
+                                            </span>
                                         </div>
                                     </div>
-                                    <h5 class="binduz-er-title"><a href="#">Spruce up your Business Profile for holiday shoppers</a></h5>
+                                    <h5 class="binduz-er-title">
+                                        <a href="#">Spruce up your Business Profile for holiday shoppers</a>
+                                    </h5>
                                 </div>
                             </div>
                             <div class="binduz-er-latest-news-item">
                                 <div class="binduz-er-thumb">
-                                    <img src="../assets/images/video-post-thumb.jpg" alt="">
-                                    <div class="binduz-er-play">
-                                        <a class="binduz-er-video-popup" href="#"><i class="fas fa-play"></i></a>
-                                    </div>
+                                    <iframe width="100%" height="" src="https://www.youtube.com/embed/79pKwdiqcwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                                 <div class="binduz-er-content">
                                     <div class="binduz-er-meta-item">
@@ -121,10 +69,15 @@
                                             <a href="#">Technology</a>
                                         </div>
                                         <div class="binduz-er-meta-date">
-                                            <span><i class="fal fa-calendar-alt"></i>24th February 2020</span>
+                                            <span>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                24th February 2020
+                                            </span>
                                         </div>
                                     </div>
-                                    <h5 class="binduz-er-title"><a href="#">The new conversational Search experience we’re thankful for</a></h5>
+                                    <h5 class="binduz-er-title">
+                                        <a href="#">The new conversational Search experience we’re thankful for</a>
+                                    </h5>
                                 </div>
                             </div>
                         </div>
@@ -136,8 +89,26 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
     name: 'LatestNews',
+    data() {
+        return {
+            lastNews: [],
+            videoNews: []
+        }
+    },
+    mounted(){
+        axios
+        .get('https://newsapi.org/v2/everything?q=Technology&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+        .then(response => (this.lastNews = response.data.articles));
+        axios
+        .get('https://newsapi.org/v2/everything?q=video&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+        .then(response => (this.videoNews = response.data.articles));
+
+    }
 }
 </script>
 

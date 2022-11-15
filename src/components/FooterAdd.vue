@@ -6,7 +6,7 @@
                     <div class=" col-lg-12">
                         <div class="binduz-er-footer-add-item text-center">
                             <span class="mb-10 d-inline-block">ADVERTISEMENT</span>
-                            <img src="../assets/images/space-bg-4.jpg" alt="">
+                            <img src="https://sixads.net/blog/advertisement-examples/?gen=twitterjpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -26,5 +26,19 @@ export default {
 
     .binduz-er-footer-add {
         padding-bottom: 60px;
+        & .binduz-er-footer-add-item{
+            max-height: 210px;
+            max-width: 100%;
+            & span {
+                margin: 20px;
+                opacity: 0.8;
+            }
+            & img {
+                height: 160px;
+                width: 100%;
+                object-fit: cover;
+                margin-bottom: 20px;
+            }
+        }
     }
 </style>

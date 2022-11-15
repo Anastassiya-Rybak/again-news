@@ -7,25 +7,14 @@
                         <div class="binduz-er-top-news-title">
                             <h3 class="binduz-er-title">Top News</h3>
                         </div>
-                        <div class="binduz-er-top-news-item">
-                            <span>01</span>
-                            <h5 class="binduz-er-title"><a href="#">How you'll find accurate and timely information on COVID-19 vaccines How you'll find accurate and timely </a></h5>
+                        <div class="binduz-er-top-news-item" v-for="(slide, idx) in slides.slice(0, 3)" :key="idx">
+                            <span>0{{idx + 1}}</span>
+                            <h5 class="binduz-er-title"><a :href="slide.url">{{slide.title}}</a></h5>
                             <div class="binduz-er-meta-date">
-                                <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
-                            </div>
-                        </div>
-                        <div class="binduz-er-top-news-item">
-                            <span>02</span>
-                            <h5 class="binduz-er-title"><a href="#">New Cook County Circuit Court clerk want to leave her predecessor’s era behind, in on updating the nation’s secondt.</a></h5>
-                            <div class="binduz-er-meta-date">
-                                <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
-                            </div>
-                        </div>
-                        <div class="binduz-er-top-news-item">
-                            <span>03</span>
-                            <h5 class="binduz-er-title"><a href="#">Organizing the world’s information: where does it all come from  Organizing the world’s information</a></h5>
-                            <div class="binduz-er-meta-date">
-                                <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
+                                <span>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i> 
+                                    {{slide.publishedAt.slice(0, 10)}}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -40,11 +29,11 @@
                         :loop="true"
                         :autoplay="{
                             delay: 3000,
-                        }"
-                        >
-                            <SwiperSlide class="binduz-er-news-viewed-most">
+                        }">
+                            <SwiperSlide class="binduz-er-news-viewed-most"
+                            v-for="(slide, slideIdx) in slides.slice(2, 4)" :key="slideIdx">
                                 <div class="binduz-er-thumb">
-                                    <img src="../assets/images/most-view-1.png" alt="">
+                                    <img :src="slide.urlToImage" alt="">
                                 </div>
                                 <div class="binduz-er-content">
                                     <div class="binduz-er-meta-item">
@@ -52,67 +41,67 @@
                                             <a href="#">Technology</a>
                                         </div>
                                         <div class="binduz-er-meta-date">
-                                            <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
+                                            <span>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                {{slide.publishedAt.slice(0,10)}}
+                                            </span>
                                         </div>
                                     </div>
-                                    <h4 class="binduz-er-title"><a href="#">How location helps provide more relevant search results</a></h4>
+                                    <h4 class="binduz-er-title"><a :href="slide.url">{{slide.title}}</a></h4>
                                     <div class="binduz-er-meta-author">
                                         <img src="../assets/images/user-2.jpg" alt="">
-                                        <span>By <span>Miranda H. Halim</span></span>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide class="binduz-er-news-viewed-most">
-                                <div class="binduz-er-thumb">
-                                    <img src="../assets/images/most-view-2.png" alt="">
-                                </div>
-                                <div class="binduz-er-content">
-                                    <div class="binduz-er-meta-item">
-                                        <div class="binduz-er-meta-categories">
-                                            <a href="#">Technology</a>
-                                        </div>
-                                        <div class="binduz-er-meta-date">
-                                            <span><i class="fal fa-calendar-alt"></i> 24th February 2020</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="binduz-er-title"><a href="#">Producer Peter CottonTale captures 2020 in a song</a></h4>
-                                    <div class="binduz-er-meta-author">
-                                        <img src="../assets/images/user-2.jpg" alt="">
-                                        <span>By <span>Miranda H. Halim</span></span>
+                                        <span>By <span>{{slide.author}}</span></span>
                                     </div>
                                 </div>
                             </SwiperSlide>
                         </Swiper>
                     </div>
                     <div class=" col-lg-4">
-                        <div class="binduz-er-top-news-faq">
-                            <h4 class="binduz-er-title">Illinois House Democrats wrangle over Madigan’s future</h4>
+                        <div class="binduz-er-top-news-faq"
+                        v-for="slide in slides.slice(5, 6)" :key="slide">
+                            <h4 class="binduz-er-title">{{slide.title}}</h4>
                             <div class="binduz-er-meta-author">
-                                <span>By <span>Miranda H. Halim</span></span>
+                                <span>By <span>{{slide.author}}</span></span>
                             </div>
                             <div class="binduz-er-answare">
-                                <p>Get Ask Amy delivered to your inbox every morning</p>
+                                <p>{{slide.description.slice(0, 100)}}</p>
                             </div>
                             <div class="binduz-er-client-thumb">
-                                <img src="../assets/images/client-thumb.png" alt="">
+                                <img :src="slide.urlToImage" alt="">
                             </div>
                         </div>
                         <div class="binduz-er-social-list">
                             <div class="binduz-er-list">
                                 <a href="#">
-                                    <span><i class="fab fa-facebook-f"></i> <span>15000</span> Likes</span>
+                                    <span>
+                                        <i class="fa fa-facebook" aria-hidden="true"></i> 
+                                        <span>15000</span> 
+                                        Likes
+                                    </span>
                                     <span>Like</span>
                                 </a>
                                 <a href="#">
-                                    <span><i class="fab fa-twitter"></i> <span>15000</span> Likes</span>
+                                    <span>
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        <span>15000</span> 
+                                        Likes
+                                    </span>
                                     <span>Tweet</span>
                                 </a>
                                 <a href="#">
-                                    <span><i class="fab fa-behance"></i> <span>5k+</span> Follower</span>
+                                    <span>
+                                        <i class="fa fa-behance" aria-hidden="true"></i>
+                                        <span>5k+</span> 
+                                        Follower
+                                    </span>
                                     <span>Follow</span>
                                 </a>
                                 <a href="#">
-                                    <span><i class="fab fa-youtube"></i> <span>15000</span> Subscribe</span>
+                                    <span>
+                                        <i class="fa fa-youtube-play" aria-hidden="true"></i> 
+                                        <span>15000</span> 
+                                        Subscribe
+                                    </span>
                                     <span>Subscribe</span>
                                 </a>
                             </div>
@@ -130,6 +119,8 @@
     import '../../node_modules/swiper/swiper.scss';
     import '../../node_modules/swiper/modules/navigation/navigation.scss';
 
+    import axios from 'axios';
+
 export default {
     name: "TopNews",
     components: { Swiper, SwiperSlide },
@@ -137,6 +128,16 @@ export default {
       return {
         modules: [Autoplay, Navigation],
       };
+    },
+    data() {
+        return {
+            slides: [],
+        }
+    },
+    mounted() {
+        axios
+            .get('https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+            .then(response => (this.slides = response.data.articles));
     },
 
 }
@@ -441,9 +442,10 @@ export default {
 }
 .binduz-er-top-news-faq{
     background: $white;
-    padding: 35px;
+    padding: 35px 35px 10px 35px;
     position: relative;
     z-index: 10;
+    width: 100%;
     @media #{$md} {
         margin-top: 30px;
     }
@@ -457,7 +459,9 @@ export default {
         z-index: -1;
         & img{
             @media #{$laptop} {
-                width: 130px;
+                width: 156px;
+                height: 157px;
+                object-fit: cover;
             }
             @media #{$lg} {
                 width: 85px;
@@ -499,7 +503,10 @@ export default {
         border-top: 1px solid #E4E4E4;
         padding-top: 18px;
         margin-top: 20px;
-        width: 220px;
+        width: 80% !important;
+        & p {
+            width: 75%;
+        }
     }
 }
 .binduz-er-top-news-2-item{

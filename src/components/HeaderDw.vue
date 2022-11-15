@@ -7,10 +7,12 @@
                         <div class=" col-lg-12">
                             <div class="binduz-er-header-meddle-bar d-flex justify-content-between">
                                 <div class="binduz-er-logo">
-                                    <a href="#"><img src="../assets/images/logo-3.png" alt=""></a>
+                                    <a href="#">
+                                        <img src="../assets/images/logo-3.png" alt="">
+                                    </a>
                                 </div>
                                 <div class="binduz-er-header-add">
-                                    <img src="../assets/images/space-bg-3.jpg" alt="">
+                                    <img src="https://visme.co/blog/wp-content/uploads/2019/08/header-1.gif" alt="">
                                 </div>
                             </div>
                         </div>
@@ -22,20 +24,15 @@
                                     <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                         <ul class="navbar-nav mr-auto">
                                             <li class="nav-item active">
-                                                <a class="nav-link" href="index.html">Home <i class="fa fa-angle-down"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="index.html">Home 1</a></li>
-                                                    <li><a href="index-2.html">Home 2</a></li>
-                                                    <li><a href="index-3.html">Home 3</a></li>
-                                                    <li><a href="index-4.html">Home 4</a></li>
-                                                    <li><a href="index-5.html">Home 5</a></li>
-                                                    <li><a href="index-6.html">Home 6</a></li>
-                                                    <li><a href="index-7.html">Home 7</a></li>
-                                                    <li><a href="index-8.html">Home 8</a></li>
-                                                    <li><a href="index-9.html">Home 9</a></li>
-                                                    <li><a href="index-10.html">Home 10</a></li>
-                                                    <li><a href="index-11.html">Home 11</a></li>
-                                                    <li><a href="index-12.html">Home 12</a></li>
+                                                <a class="nav-link d-flex align-items-center" href="/">
+                                                    Categories 
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <ul class="sub-menu" >
+                                                    <li 
+                                                    v-for="categPageMain in categoriesPages" :key="categPageMain">
+                                                        <a :href="categPageMain.url">{{categPageMain.name}}</a>
+                                                    </li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item">
@@ -43,13 +40,6 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="author.html">Author</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#">Pages<i class="fa fa-angle-down"></i></a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="blog-details-1.html">Blog Details 1</a></li>
-                                                    <li><a href="blog-details-2.html">Blog Details 2</a></li>
-                                                </ul>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="binduz-er-nav-link" href="about-us.html">About</a>
@@ -67,10 +57,18 @@
                                             :loop="true"
                                             :autoplay="{
                                                 delay: 3000,
-                                            }">
-                                            <swiper-slide><p><span><i class="fas fa-bolt"></i> Trending News:</span> <a href="#">Making sense of 2020 through Search</a></p></swiper-slide>
-                                            <swiper-slide><p><span><i class="fas fa-bolt"></i> Trending News:</span> <a href="#">2020: The new normals of daily life</a></p></swiper-slide>
-                                            <swiper-slide><p><span><i class="fas fa-bolt"></i> Trending News:</span> <a href="#">Miranda halim was viral after finish his workout.</a></p></swiper-slide>
+                                            }"
+                                            >
+                                            <swiper-slide
+                                            v-for="trend in trendingNews" :key="trend">
+                                                <p>
+                                                    <span>
+                                                        <i class="fa fa-bolt" aria-hidden="true"></i> 
+                                                        Trending News:
+                                                    </span> 
+                                                    <a :href="trend.url">{{trend.title.slice(0, 50)}}</a>
+                                                </p>
+                                            </swiper-slide>
                                         </swiper>
                                     </div>
                                 </nav>
@@ -87,7 +85,7 @@
     import { Swiper, SwiperSlide } from 'swiper/vue';
     import {Autoplay} from 'swiper';
     import '../../node_modules/swiper/swiper.scss';
-
+    import axios from 'axios';
 
 export default {
     name: 'HeaderDw',
@@ -95,11 +93,67 @@ export default {
       Swiper,
       SwiperSlide,
     },
+    data(){
+        return{
+            categoriesPages: [
+                {
+                    name: 'Breaking News',
+                    url: '/'
+                },
+                {
+                    name: 'Entertaiment',
+                    url: '/'
+                },                
+                {
+                    name: 'Sports',
+                    url: '/'
+                },                
+                {
+                    name: 'Politics',
+                    url: '/'
+                },                
+                {
+                    name: 'Trending',
+                    url: '/'
+                },                
+                {
+                    name: 'Football',
+                    url: '/'
+                },                
+                {
+                    name: 'Gaming',
+                    url: '/'
+                },                
+                {
+                    name: 'Technology',
+                    url: '/'
+                },                
+                {
+                    name: 'Covid-19',
+                    url: '/'
+                },                
+                {
+                    name: 'Movies',
+                    url: '/'
+                },                
+                {
+                    name: 'Nature',
+                    url: '/'
+                },
+            ],
+            trendingNews: []
+        }
+    },
     setup() {
       return {
         modules: [Autoplay],
       };
     },
+    mounted() {
+        axios
+        .get('https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+        .then(response => (this.trendingNews = response.data.articles));
+    }
 }
 </script>
 
@@ -172,9 +226,9 @@ z-index: 99;
                 }
 
                 & .binduz-er-navbar-btn {
-                    width: 62%;
+                    width: 48%;
                     @media #{$lg} {
-                        width: 65%;
+                        width: 55%;
                     }
                     @media #{$md} {
                         display: none;
@@ -318,6 +372,7 @@ z-index: 99;
             padding: 7px 0 0;
             align-items: center;
             background-color: transparent;
+            width: 100% !important;
             &.binduz-er-page{
                 padding: 40px 0;
             }
@@ -377,11 +432,24 @@ z-index: 99;
                     }
                 }
             }
-            & .binduz-er-logo{
+            &.binduz-er-logo{
                 margin: 0;
-                width: 260px;
+                max-width: 36% !important;
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
                 @media #{$xs} {
                     min-width: 160px;
+                }
+            }
+            .binduz-er-header-add {
+                width: 60% !important;
+                &img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
         }
@@ -391,6 +459,28 @@ z-index: 99;
 
 
 
+.binduz-er-logo{
+    max-width: 35% !important;
+    & a {
+        width: 100%;
+        height: 100%;
+
+        &>img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    }
+}
+.binduz-er-header-add {
+    width: 60% !important;
+    &>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
 
 
 

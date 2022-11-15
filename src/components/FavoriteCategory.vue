@@ -9,58 +9,13 @@
                                 <h3 class="binduz-er-title">Favorites Categories</h3>
                             </div>
                             <div class="binduz-er-favorites-categories-list">
-                                <div class="binduz-er-item">
+                                <div class="binduz-er-item" 
+                                v-for="categ in favoriteCateg" :key="categ">
                                     <a href="#">
-                                        <img src="../assets/images/favorites-categories-1.png" alt="">
-                                        <span>Sports</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-2.png" alt="">
-                                        <span>Covid-19</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-3.png" alt="">
-                                        <span>Journal</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-4.png" alt="">
-                                        <span>Beating</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-5.png" alt="">
-                                        <span>Movies</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-6.png" alt="">
-                                        <span>Magazine</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-7.png" alt="">
-                                        <span>Film</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-8.png" alt="">
-                                        <span>Games</span>
-                                    </a>
-                                </div>
-                                <div class="binduz-er-item">
-                                    <a href="#">
-                                        <img src="../assets/images/favorites-categories-9.png" alt="">
-                                        <span>Nature</span>
+                                        <div class="fav-categ__img">
+                                            <img :src="categ.img" :alt="categ.name">
+                                        </div>
+                                        <span>{{categ.name}}</span>
                                     </a>
                                 </div>
                             </div>
@@ -71,10 +26,52 @@
         </section>
     </div>
 </template>
-
 <script>
+
 export default {
     name: 'FavoriteCategory',
+    data(){
+        return {
+            favoriteCateg:[
+                {
+                    name:'Sports',
+                    img: 'https://www.gannett-cdn.com/presto/2022/11/13/PGRB/1c8bccb3-a5bf-40ad-8749-59b750477dcb-MJS_APC_PackVSCowboys_1113221076djp.jpg.png?crop=3249,1828,x0,y0&width=660&height=370&format=pjpg&auto=webp',
+                },
+                {
+                    name:'Covid-19',
+                    img: 'https://www.iru.org/sites/default/files/styles/desktop_2x_736x460/public/2020-03/Coronavirus%20%28COVID-19%29%20IRU%20calls%20on%20governments%20to%20help%20keep%20road%20transport%20supply%20chains%20and%20mobility%20networks%20moving.jpg?h=d1f557c8&itok=fLEDIe4f',
+                }, 
+                {
+                    name:'Journal',
+                    img: 'https://cdn.wan-ifra.org/wp-content/uploads/2021/07/24134813/wsj.jpg'
+                }, 
+                {
+                    name:'Beating',
+                    img: 'https://i0.wp.com/flintbeat.com/wp-content/uploads/2022/05/IMG_7997.jpg?w=2000&ssl=1'
+                }, 
+                {
+                    name:'Movies',
+                    img: 'https://s3.amazonaws.com/static.rogerebert.com/uploads/movie/movie_poster/the-curse-of-bridge-hollow-2022/widget_the-curse-of-bridge-hollow-movie-poster-2022.jpeg'
+                }, 
+                {
+                    name:'Magazine',
+                    img: 'https://pocketmagscovers.imgix.net/cosmopolitan-magazine-june-july-2022-cover.jpg?w=362&auto=format'
+                }, 
+                {
+                    name:'Film',
+                    img: 'https://images.ctfassets.net/22n7d68fswlw/6DPevwtmTp7AKheG8p7Bjh/6587bd27a50d6669357bba015bdbd328/Film_Heritage_filmstrip.jpg?w=1200&h=630'
+                },
+                {
+                    name:'Games',
+                    img: 'https://i.guim.co.uk/img/media/1185a81df568b47b3bb678ae0aa3c9d79aa2432c/211_0_3600_2160/master/3600.jpg?width=700&quality=85&auto=format&fit=max&s=aecdfc8e6755fdc7bd16709833146735'
+                }, 
+                {
+                    name:'Nature',
+                    img: 'https://process.images.nathab.com/A6dTpd53SmIg0pBfJJhgAz/resize=width:864/quality=value:60/cache=expiry:31536000/compress/https://www.nathab.com/uploaded-files/AdobeStock_115649942.jpg'
+                }
+            ],
+        }
+    }
 }
 </script>
 
@@ -116,7 +113,18 @@ export default {
             @media #{$lg} {
                 margin-right: 5px;
                 margin-bottom: 15px;
-                width: 16%;
+                width: 14% !important;
+
+                & .fav-categ__img {
+                overflow: hidden;
+                width: 100% !important;
+                height: 100px;
+                    & img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover !important;
+                    }
+                }
             }
             @media #{$md} {
                 margin-right: 20px;
@@ -141,4 +149,15 @@ export default {
         }
     }
 }
+.fav-categ__img {
+    overflow: hidden;
+    width: 92px;
+    height: 100px;
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover !important;
+        }
+    }
+
 </style>

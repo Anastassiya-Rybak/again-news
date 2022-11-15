@@ -9,14 +9,32 @@
                                 <div class=" col-lg-4">
                                     <div class="binduz-er-footer-about text-center">
                                         <div class="binduz-er-logo">
-                                            <a href="#"><img src="../assets/images/logo-4.png" alt=""></a>
+                                            <a href="#">
+                                                <img src="../assets/images/logo-4.png" alt="">
+                                            </a>
                                         </div>
                                         <p>Michael Madigan on Sunday was confronted with the reality that he lacks support from nearly a third.</p>
                                         <ul>
-                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-behance" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -26,36 +44,18 @@
                                             <h4 class="binduz-er-title">Photo Showcase</h4>
                                         </div>
                                         <div class="binduz-er-footer-gallery-widget d-flex">
-                                            <div class="binduz-er-item">
+                                            <div class="binduz-er-item"
+                                            v-for="one in 3" :key="one">
                                                 <a href="#">
-                                                    <img src="../assets/images/footer-gallery-1.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="binduz-er-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/footer-gallery-2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="binduz-er-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/footer-gallery-3.jpg" alt="">
+                                                    <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/food-delivery-advertisement-design-template-cfd149289a4f241f8bbde6277ac6960c_screen.jpg?ts=1622237544" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="binduz-er-footer-gallery-widget d-flex">
-                                            <div class="binduz-er-item">
+                                            <div class="binduz-er-item"
+                                            v-for="one in 3" :key="one">
                                                 <a href="#">
-                                                    <img src="../assets/images/footer-gallery-4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="binduz-er-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/footer-gallery-5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="binduz-er-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/footer-gallery-6.jpg" alt="">
+                                                    <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/food-delivery-advertisement-design-template-cfd149289a4f241f8bbde6277ac6960c_screen.jpg?ts=1622237544" alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -632,6 +632,10 @@ export default {
 
     & .binduz-er-logo {
         margin-bottom: 23px;
+        width: 100%;
+        & img {
+            width: 100%;
+        }
     }
 
     & ul {
@@ -700,7 +704,21 @@ export default {
     }
 }
 
+.binduz-er-logo {
+        margin: 0 auto;
+        margin-bottom: 23px;
+        max-width: 100% !important;
 
+        & a {
+            width: 100%;
+
+            & img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain !important;
+        }
+    }
+}
 .binduz-er-footer-gallery {
     @media #{$lg} {
         margin-left: 0;

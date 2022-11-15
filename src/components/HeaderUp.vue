@@ -1,119 +1,13 @@
 <template>
   <div class="headerUp">
-    <div class="binduz-er-news-off_canvars_overlay"></div>
-    <div class="binduz-er-news-offcanvas_menu binduz-er-news-offcanvas_menu_left">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="binduz-er-news-offcanvas_menu_wrapper">
-                        <div class="binduz-er-news-canvas_close">
-                            <a href="javascript:void(0)"><i class="fal fa-times"></i></a>
-                        </div>
-                        <div class="binduz-er-news-header-social">
-                            <ul class="text-center">
-                                <li><a href="#">facebook</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Skype</a></li>
-                            </ul>
-                        </div>
-                        <div id="menu" class="text-left ">
-                            <ul class="binduz-er-news-offcanvas_main_menu">
-                                <li class="binduz-er-news-menu-item-has-children binduz-er-news-active">
-                                    <a href="#">Home</a>
-                                    <ul class="binduz-er-news-sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                        <li><a href="index-5.html">Home 5</a></li>
-                                        <li><a href="index-6.html">Home 6</a></li>
-                                        <li><a href="index-7.html">Home 7</a></li>
-                                        <li><a href="index-8.html">Home 8</a></li>
-                                        <li><a href="index-9.html">Home 9</a></li>
-                                        <li><a href="index-10.html">Home 10</a></li>
-                                        <li><a href="index-11.html">Home 11</a></li>
-                                        <li><a href="index-12.html">Home 12</a></li>
-                                    </ul>
-                                </li>
-                                <li class="binduz-er-news-menu-item-has-children">
-                                    <a href="archived.html">Archived </a>
-                                </li>
-                                <li class="binduz-er-news-menu-item-has-children">
-                                    <a href="author.html">Author</a>
-                                </li>
-                                <li class="binduz-er-news-menu-item-has-children">
-                                    <a href="#"> Pages</a>
-                                    <ul class="binduz-er-news-sub-menu">
-                                        <li><a href="blog-details-1.html">Blog Details 1</a></li>
-                                        <li><a href="blog-details-2.html">Blog Details 2</a></li>
-                                    </ul>
-                                </li>
-                                <li class="binduz-er-news-menu-item-has-children">
-                                    <a href="about-us.html"> About</a>
-                                </li>
-                                <li class="binduz-er-news-menu-item-has-children">
-                                    <a href="contact.html"> Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="binduz-er-news-offcanvas_footer">
-                           <div class="binduz-er-news-logo text-center mb-30 mt-30">
-                               <a href="index.html">
-                                   <img src="../assets/images/logo.png" alt="">
-                               </a>
-                           </div>
-                            <p>I’m Michal Škvarenina, a multi-disciplinary designer currently working at Wild and as a freelance designer.</p>
-                            <ul>
-                                <li><i class="fas fa-phone"></i> +212 34 45 45 98</li>
-                                <li><i class="fas fa-home"></i> Angle Bd Abdelmoumen & rue soumaya, Résidence</li>
-                                <li><i class="fas fa-envelope"></i> hello@example.com</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--====== OFFCANVAS MENU PART ENDS ======-->
-    
-    <!--====== SEARCH PART START ======-->
-
-    <div class="binduz-er-news-search-box">
-        <div class="binduz-er-news-search-header">
-            <div class=" container mt-60">
-                <div class="row">
-                    <div class=" col-6">
-                        <img src="../assets/images/logo-4.png" alt=""> <!-- search title -->
-                    </div>
-                    <div class=" col-6">
-                        <div class="binduz-er-news-search-close float-end">
-                            <button class="binduz-er-news-search-close-btn">Close <span></span><span></span></button>
-                        </div> <!-- search close -->
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- search header -->
-        <div class="binduz-er-news-search-body">
-            <div class=" container">
-                <div class="row">
-                    <div class=" col-lg-12">
-                        <div class="binduz-er-news-search-form">
-                            <form action="#">
-                                <input type="text" placeholder="Search for Products">
-                                <button><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- search body -->
-    </div>
-
-    <!--====== SEARCH PART ENDS ======-->
-
-    <!--====== BINDUZ TOP HEADER PART START ======-->
-
+    <SearchPopup 
+        v-if="searchWindowVisible"
+        @closeSearchPopup="closeWindowSearch"
+    />
+    <MenuPopup 
+        v-if="menuWindowVisible"
+        @closePopup="closeWindowMenu"
+    />
     <div class="binduz-er-news-top-header-area-2 bg_cover">
         <div class=" container">
             <div class="row align-items-center">
@@ -121,10 +15,14 @@
                     <div class="binduz-er-news-top-header-btns">
                         <ul>
                             <li>
-                                <span class="binduz-er-toggle-btn binduz-er-news-canvas_open"><i class="fal fa-bars"></i> Menu</span>
+                                <span class="binduz-er-toggle-btn binduz-er-news-canvas_open"
+                                @click="openMenuWindow"
+                                ><i class="fa fa-bars" aria-hidden="true"></i>Menu</span>
                             </li>
                             <li>
-                                <a class="binduz-er-news-search-open" href="#"><i class="fal fa-search"></i> Search</a>
+                                <a class="binduz-er-news-search-open" href="#"
+                                @click="openSearchWindow"
+                                ><i class="fa fa-search" aria-hidden="true"></i> Search</a>
                             </li>
                         </ul>
                     </div>
@@ -132,9 +30,24 @@
                 <div class=" col-lg-6 col-md-7">
                     <div class="binduz-er-news-top-header-weather">
                         <ul>
-                            <li><a href="#"><i class="fal fa-cloud"></i> 22°F</a></li>
-                            <li><a href="#"><i class="fal fa-cloud"></i> 22°F</a></li>
-                            <li><a href="#"><i class="fal fa-user"></i> Login/Sign</a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                                     {{toRound(weather)}}°C
+                                    </a>
+                                </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-cloud" aria-hidden="true"></i> 
+                                    {{toRoundF(weather)}}°F
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-user-o" aria-hidden="true"></i> 
+                                    Login/Sign
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -145,13 +58,59 @@
 </template>
 
 <script>
+import SearchPopup from './popup/SearchPopup.vue';
+import MenuPopup from './popup/MenuPopup.vue';
+import axios from 'axios';
+
 export default {
    name: 'HeaderUp', 
+   components: {
+    SearchPopup,
+    MenuPopup
+   },
+   data(){
+    return{
+        searchWindowVisible: false,
+        menuWindowVisible: false,
+        weather:[]
+    }
+   },
+    methods: {
+        openSearchWindow(){
+            this.searchWindowVisible = true;
+        },
+        openMenuWindow(){
+            this.menuWindowVisible = true;
+        },
+        closeWindowSearch(){
+            this.searchWindowVisible = false;
+        },
+        closeWindowMenu(){
+            this.menuWindowVisible =false;
+        },
+        toRound(ele){
+            let tempUnform = ele - 273;
+            let temp = Math.round(tempUnform);
+            return temp;
+        },
+        toRoundF(ele){
+            let tempUnform = (ele - 273) * 9 / 5 + 32;
+            let temp = Math.round(tempUnform);
+            return temp;
+        }
+
+    },
+    mounted(){
+        axios
+        .get ('http://api.openweathermap.org/data/2.5/weather?q=Karaganda&appid=0aba706e4dcac03de2493c0fa21fd9cf')
+        .then (response => (this.weather = response.data.main.temp));
+    }
 }
 </script>
 
 <style lang="scss">
 @import '../assets/styles/styles.scss';
+
 
 .binduz-er-top-header-area {
 
@@ -278,6 +237,7 @@ padding: 22px 0;
                 cursor: pointer;
 
                 & i {
+                    font-weight: 100;
                     padding-right: 5px;
                 }
             }
