@@ -1,9 +1,12 @@
 <template>
   <div class="headerUp">
-    <SearchPopup 
-        v-if="searchWindowVisible"
-        @closeSearchPopup="closeWindowSearch"
-    />
+    <transition name="fade">
+        <SearchPopup 
+            v-if="searchWindowVisible"
+            @closeSearchPopup="closeWindowSearch"
+            @goSearch="addSearchInfo"
+        />
+    </transition>
     <MenuPopup 
         v-if="menuWindowVisible"
         @closePopup="closeWindowMenu"
@@ -16,13 +19,19 @@
                         <ul>
                             <li>
                                 <span class="binduz-er-toggle-btn binduz-er-news-canvas_open"
-                                @click="openMenuWindow"
-                                ><i class="fa fa-bars" aria-hidden="true"></i>Menu</span>
+                                    @click="menuWindowVisible = !menuWindowVisible"
+                                >
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                    Menu
+                                </span>
                             </li>
                             <li>
                                 <a class="binduz-er-news-search-open" href="#"
-                                @click="openSearchWindow"
-                                ><i class="fa fa-search" aria-hidden="true"></i> Search</a>
+                                    @click="searchWindowVisible = !searchWindowVisible"
+                                >
+                                    <i class="fa fa-search" aria-hidden="true"></i> 
+                                    Search
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -76,12 +85,6 @@ export default {
     }
    },
     methods: {
-        openSearchWindow(){
-            this.searchWindowVisible = true;
-        },
-        openMenuWindow(){
-            this.menuWindowVisible = true;
-        },
         closeWindowSearch(){
             this.searchWindowVisible = false;
         },
@@ -97,6 +100,9 @@ export default {
             let tempUnform = (ele - 273) * 9 / 5 + 32;
             let temp = Math.round(tempUnform);
             return temp;
+        },
+        addSearchInfo(searchInfo){
+            this.$emit('addSearchInfo', searchInfo);
         }
 
     },
@@ -111,6 +117,56 @@ export default {
 <style lang="scss">
 @import '../assets/styles/styles.scss';
 
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter-active {
+    animation: stickyIn 0.6s;
+}
+.fade-leave-active {
+    animation: stickyOut 0.6s;
+}
+// .fade-enter, .fade-leave-to {
+//   opacity: 0;
+// }
+@-webkit-keyframes stickyIn {
+0% {
+    top: -100%;
+}
+
+100% {
+    top: 0;
+}
+}
+
+@keyframes stickyIn {
+0% {
+    top: -100%;
+}
+
+100% {
+    top: 0;
+}
+}
+@-webkit-keyframes stickyOut {
+0% {
+    top: 0;
+}
+
+100% {
+    top: -100%;
+}
+}
+
+@keyframes stickyOut {
+0% {
+    top: 0;
+}
+
+100% {
+    top: -100%;
+}
+}
 
 .binduz-er-top-header-area {
 

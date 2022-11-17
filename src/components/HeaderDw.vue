@@ -66,7 +66,7 @@
                                                         <i class="fa fa-bolt" aria-hidden="true"></i> 
                                                         Trending News:
                                                     </span> 
-                                                    <a :href="trend.url">{{trend.title.slice(0, 50)}}</a>
+                                                    <a :href="trend.url">{{trend.title.slice(0, 45)}}</a>
                                                 </p>
                                             </swiper-slide>
                                         </swiper>

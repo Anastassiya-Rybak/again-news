@@ -1,83 +1,85 @@
 <template>
-    <div class="menu-popup">
-        <div class="binduz-er-news-off_canvars_overlay  binduz-er-news-active"
-        @click="closePopup"
-        ></div>
-        <div class="binduz-er-news-offcanvas_menu binduz-er-news-offcanvas_menu_left">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="binduz-er-news-offcanvas_menu_wrapper binduz-er-news-active">
-                            <div class="binduz-er-news-canvas_close">
-                                <a href="#"
-                                @click="closePopup">
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="binduz-er-news-header-social">
-                                <ul class="text-center">
-                                    <li v-for="sm in socialMedia" :key="sm">
-                                        <a class="d-flex d-flex-row" :href="sm.url">{{sm.name}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="menu" class="text-left ">
-                                <ul class="binduz-er-news-offcanvas_main_menu">
-                                    <li class="binduz-er-news-menu-item-has-children binduz-er-news-active">
-                                        <a href="#" @click="openCategories">
-                                            Categories
-                                            <i class="fa fa-angle-down" aria-hidden="true" v-if="categoriesOpen"></i>
-                                            <i class="fa fa-angle-right" aria-hidden="true" v-else></i>
-                                        </a>
-                                        <div v-if="categoriesOpen">
-                                            <ul class="binduz-er-news-sub-menu" 
-                                            v-for="categPage in categoriesPages" :key="categPage"
-                                            >
-                                                <li>
-                                                    <a :href="categPage.url">{{categPage.name}}</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="binduz-er-news-menu-item-has-children">
-                                        <a href="/">Authors</a>
-                                    </li>
-                                    <li class="binduz-er-news-menu-item-has-children">
-                                        <a href="/"> About</a>
-                                    </li>
-                                    <li class="binduz-er-news-menu-item-has-children">
-                                        <a href="/"> Contact</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="binduz-er-news-offcanvas_footer">
-                            <div class="binduz-er-news-logo text-center mb-30 mt-30">
-                                <a href="index.html">
-                                    <img src="../../assets/images/logo.png" alt="">
-                                </a>
-                            </div>
-                                <p>I’m Michal Škvarenina, a multi-disciplinary designer currently working at Wild and as a freelance designer.</p>
-                                <ul>
-                                    <li>
-                                        <i class="fa fa-phone" aria-hidden="true"></i> 
-                                        +212 34 45 45 98
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-home" aria-hidden="true"></i>
-                                        Angle Bd Abdelmoumen & rue soumaya, Résidence
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-envelope" aria-hidden="true"></i> 
-                                        hello@example.com
-                                    </li>
-                                </ul>
+    <transition name="fade">
+        <div class="menu-popup">
+            <div class="binduz-er-news-off_canvars_overlay  binduz-er-news-active"
+            @click="closePopup"
+            ></div>
+            <div class="binduz-er-news-offcanvas_menu binduz-er-news-offcanvas_menu_left">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="binduz-er-news-offcanvas_menu_wrapper binduz-er-news-active">
+                                <div class="binduz-er-news-canvas_close">
+                                    <a href="#"
+                                    @click="closePopup">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="binduz-er-news-header-social">
+                                    <ul class="text-center">
+                                        <li v-for="sm in socialMedia" :key="sm">
+                                            <a class="d-flex d-flex-row" :href="sm.url">{{sm.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="menu" class="text-left ">
+                                    <ul class="binduz-er-news-offcanvas_main_menu">
+                                        <li class="binduz-er-news-menu-item-has-children binduz-er-news-active">
+                                            <a href="#" @click="openCategories">
+                                                Categories
+                                                <i class="fa fa-angle-down" aria-hidden="true" v-if="categoriesOpen"></i>
+                                                <i class="fa fa-angle-right" aria-hidden="true" v-else></i>
+                                            </a>
+                                            <div v-if="categoriesOpen">
+                                                <ul class="binduz-er-news-sub-menu" 
+                                                v-for="categPage in categoriesPages" :key="categPage"
+                                                >
+                                                    <li>
+                                                        <a :href="categPage.url">{{categPage.name}}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="binduz-er-news-menu-item-has-children">
+                                            <a href="/">Authors</a>
+                                        </li>
+                                        <li class="binduz-er-news-menu-item-has-children">
+                                            <a href="/"> About</a>
+                                        </li>
+                                        <li class="binduz-er-news-menu-item-has-children">
+                                            <a href="/"> Contact</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="binduz-er-news-offcanvas_footer">
+                                <div class="binduz-er-news-logo text-center mb-30 mt-30">
+                                    <a href="index.html">
+                                        <img src="../../assets/images/logo.png" alt="">
+                                    </a>
+                                </div>
+                                    <p>I’m Michal Škvarenina, a multi-disciplinary designer currently working at Wild and as a freelance designer.</p>
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-phone" aria-hidden="true"></i> 
+                                            +212 34 45 45 98
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-home" aria-hidden="true"></i>
+                                            Angle Bd Abdelmoumen & rue soumaya, Résidence
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-envelope" aria-hidden="true"></i> 
+                                            hello@example.com
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -166,6 +168,57 @@ export default {
 <style lang="scss">
 
 @import '@/assets/styles/styles.scss';
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter-active {
+    animation: stickyIn 2.6s;
+}
+.fade-leave-active {
+    animation: stickyOut 2.6s;
+}
+// .fade-enter, .fade-leave-to {
+//   opacity: 0;
+// }
+@-webkit-keyframes stickyIn {
+0% {
+    top: -100%;
+}
+
+100% {
+    top: 0;
+}
+}
+
+@keyframes stickyIn {
+0% {
+    top: -100%;
+}
+
+100% {
+    top: 0;
+}
+}
+@-webkit-keyframes stickyOut {
+0% {
+    top: 0;
+}
+
+100% {
+    top: -100%;
+}
+}
+
+@keyframes stickyOut {
+0% {
+    top: 0;
+}
+
+100% {
+    top: -100%;
+}
+}
 
 .binduz-er-news-off_canvars_overlay {
     width: 100%;

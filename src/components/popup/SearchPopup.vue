@@ -1,6 +1,5 @@
 <template>
-    <div class="search-popup binduz-er-news-search-box open"
-    >
+    <div class="search-popup binduz-er-news-search-box open">
         <div class="binduz-er-news-search-header">
             <div class=" container mt-60">
                 <div class="row">
@@ -19,13 +18,15 @@
             </div> <!-- container -->
         </div> <!-- search header -->
         <div class="binduz-er-news-search-body">
-            <div class=" container">
+            <div class="container">
                 <div class="row">
                     <div class=" col-lg-12">
                         <div class="binduz-er-news-search-form">
                             <form action="#">
-                                <input type="text" placeholder="Search for Products"
-                                v-model="searchValue">
+                                <input type="search" placeholder="Search for Item"
+                                    v-model="searchValue"
+                                    @input="onUserChange"
+                                >
                                 <button @click="search">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -36,10 +37,10 @@
             </div> <!-- container -->
         </div> <!-- search body -->
     </div>
-
 </template>
 
 <script>
+// import SearchResult from '../SearchResult.vue';
 export default {
     name: 'SearchPopup',
     data(){
@@ -51,10 +52,13 @@ export default {
         closeSearchPopup(){
             this.$emit('closeSearchPopup');
         },
-        search(){
-
+        search(e){
+            this.$emit('goSearch', this.searchValue);
+            e.preventDefault();
+            this.closeSearchPopup();
+            this.searchValue = '';
         }
-    }
+    },
 }
 </script>
 
