@@ -8,27 +8,23 @@
                             <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation"
                                     v-for="(category, idx) in categories" :key="idx"
-                                    :data-btn="idx"
-                                    @click="chooseCateg(idx)" 
+                                    :data-btn="idx" @click="chooseCateg(idx)" 
                                 >
-                                    <a :class="'nav-link tab-btn '+(activeTab == idx ? 'active' : '')"
-                                        role="tab" 
-                                        aria-controls="pills-1" 
-                                        aria-selected="true">
-                                    {{category.name}}</a>
+                                    <a :class="'nav-link tab-btn ' + (activeTab == idx ? 'active' : '')"
+                                        role="tab" aria-controls="pills-1" aria-selected="true" 
+                                        @click.prevent>{{ category.name }}</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="tab-content" id="pills-tabContent">
-                            <div 
-                                v-for="(contents, idx) in categoriesContent" :key="idx"
-                                :class="'tab-pane fade '+(activeTab == idx ? 'active show' : 'd-none')" 
+                            <div v-for="(category, idx) in categories" :key="idx"
+                                :class="'tab-pane fade ' + (activeTab == idx ? 'active show' : 'd-none')" 
                                 id="pills-1" role="tabpanel" 
                                 aria-labelledby="pills-1-tab" data-content="0"
                             >
                                 <div class="binduz-er-news-categories-box ">
                                     <div class="row">
-                                        <div class="col-lg-4" v-for="(content, contentIndex) in contents.slice(0, 3)" :key="contentIndex">
+                                        <div class="col-lg-4" v-for="(content, contentIndex) in category.content.slice(0, 3)" :key="contentIndex">
                                             <div class="binduz-er-news-categories-item">
                                                 <div class="binduz-er-thumb">
                                                     <img :src="content.urlToImage" alt="">
@@ -58,176 +54,183 @@
 </template>
 
 <script>
-import axios from 'axios';
-export default {
-    name: 'CategoryLine',
-    data(){
-        return {
-            categories: [
-                {name:'Breaking News'},
-                {name:'Entertainment'},
-                {name:'Sports'},
-                {name:'Politics'},
-                {name:'Trending'},
-                {name:'Football'},
-                {name:'Gaming'}
-            ],
-            activeTab: 0,
-            categoriesContent: [
-                [],
-                [],
-                [],
-                [],
-                [],
-                [],
-                []
-            ],
-        }
-    },
-    methods: {
-        chooseCateg (index) {
-            this.activeTab = index;
-        }
-    },
-    mounted() {
-    axios
-        .get('https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.categoriesContent[0] = response.data.articles));
-    axios
-        .get('https://newsapi.org/v2/everything?q=Entertainment&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.categoriesContent[1] = response.data.articles));
-    axios
-        .get('https://newsapi.org/v2/everything?q=Sport&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.categoriesContent[2] = response.data.articles));
-    axios
-        .get('https://newsapi.org/v2/everything?q=Politics&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.categoriesContent[3] = response.data.articles));
-    axios
-        .get('https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.categoriesContent[4] = response.data.articles));
-    axios
-        .get('https://newsapi.org/v2/everything?q=Football&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.categoriesContent[5] = response.data.articles));
-    axios
-        .get('https://newsapi.org/v2/everything?q=Gaming&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.categoriesContent[6] = response.data.articles));
+    import axios from 'axios';
+    export default {
+        name: 'CategoryLine',
+        data(){
+            return {
+                categories: [
+                    {
+                        name: 'Breaking News',
+                        content: [],
+                        link: 'https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
+                    },
+                    {
+                        name: 'Entertainment',
+                        content: [],
+                        link: 'https://newsapi.org/v2/everything?q=Entertainment&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
+                    },
+                    {
+                        name: 'Sports',
+                        content: [],
+                        link: 'https://newsapi.org/v2/everything?q=Sport&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
+                    },
+                    {
+                        name: 'Politics',
+                        content: [],
+                        link: 'https://newsapi.org/v2/everything?q=Politics&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
+                    },
+                    {
+                        name: 'Trending',
+                        content: [],
+                        link: 'https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
+                    },
+                    {
+                        name: 'Football',
+                        content: [],
+                        link: 'https://newsapi.org/v2/everything?q=Football&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
+                    },
+                    {
+                        name: 'Gaming',
+                        content: [],
+                        link: 'https://newsapi.org/v2/everything?q=Gaming&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
+                    }
+                ],
+                activeTab: 0,
+            }
+        },
+        methods: {
+            chooseCateg (index) {
+                this.activeTab = index;
+                this.getContent();
+            },
+            async getContent(){
+                if (this.categories[this.activeTab].lenght !== 0) {
+                    axios
+                        .get(this.categories[this.activeTab].link)
+                        .then(response => (this.categories[this.activeTab].content = response.data.articles));
+                }
+            }
+        },
+        mounted() {
+            this.getContent()
+        },
     }
-}
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/styles.scss';
+    @import '@/assets/styles/styles.scss';
 
-.active {
-    display: flex;
-}
+    .active {
+        display: flex;
+    }
 
-.tab-btn {
-    cursor: pointer;
-}
+    .tab-btn {
+        cursor: pointer;
+    }
 
-.binduz-er-news-categories-tab {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    .binduz-er-news-categories-tab {
+        margin-top: 40px;
+        margin-bottom: 40px;
 
-    & ul {
-        & li {
-            & a {
-                background-color: $white !important;
-                color: $text-color !important;
-                border-radius: 0 !important;
-                margin: 0 8px;
-                @media #{$md} {
-                    margin: 0 6px;
-                    font-size: 14px;
-                }
-                @media #{$xs} {
-                    margin: 0 2px 4px;
-                }
+        & ul {
+            & li {
+                & a {
+                    background-color: $white !important;
+                    color: $text-color !important;
+                    border-radius: 0 !important;
+                    margin: 0 8px;
+                    @media #{$md} {
+                        margin: 0 6px;
+                        font-size: 14px;
+                    }
+                    @media #{$xs} {
+                        margin: 0 2px 4px;
+                    }
 
-                &.active {
-                    color: #fff !important;
-                    background-color: $theme-color-2 !important;
+                    &.active {
+                        color: #fff !important;
+                        background-color: $theme-color-2 !important;
+                    }
                 }
             }
         }
     }
-}
 
-.binduz-er-news-categories-box {
-    margin-bottom: 40px;
-    & .binduz-er-news-categories-item {
-        background: $white;
-        padding: 30px;
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flex;
-        display: -o-flex;
-        display: flex;
-        align-items: center;
-        @media #{$lg} {
-            display: block;
-        }
-        @media #{$md} {
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        @media #{$xs} {
-            display: block;
-        }
-
-        & .binduz-er-thumb {
-            min-width: 120px;
-            max-width: 120px;
-            overflow: hidden;
-            height: 100px;
-            margin-right: 20px;
-
-            @media #{$md} {
-                    max-width: 100%;
-                }
-
-            & img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+    .binduz-er-news-categories-box {
+        margin-bottom: 40px;
+        & .binduz-er-news-categories-item {
+            background: $white;
+            padding: 30px;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            align-items: center;
             @media #{$lg} {
+                display: block;
+            }
+            @media #{$md} {
+                padding: 10px;
                 margin-bottom: 10px;
             }
             @media #{$xs} {
-                margin-bottom: 10px;
+                display: block;
             }
-        }
 
-        & .binduz-er-content {
-            & .binduz-er-meta-date {
-                & span {
-                    color: #666;
-                    font-size: 14px;
+            & .binduz-er-thumb {
+                min-width: 120px;
+                max-width: 120px;
+                overflow: hidden;
+                height: 100px;
+                margin-right: 20px;
+
+                @media #{$md} {
+                        max-width: 100%;
+                    }
+
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                @media #{$lg} {
+                    margin-bottom: 10px;
+                }
+                @media #{$xs} {
+                    margin-bottom: 10px;
                 }
             }
 
-            & .binduz-er-news-categories-title {
-                & .binduz-er-title {
-                    margin-bottom: 0;
-                    font-size: 20px;
-                    line-height: 30px;
-                    @media #{$laptop} {
-                        font-size: 16px;
-                        line-height: 26px;
+            & .binduz-er-content {
+                & .binduz-er-meta-date {
+                    & span {
+                        color: #666;
+                        font-size: 14px;
                     }
+                }
 
-                    & a {
-                        color: $black;
+                & .binduz-er-news-categories-title {
+                    & .binduz-er-title {
+                        margin-bottom: 0;
+                        font-size: 20px;
+                        line-height: 30px;
+                        @media #{$laptop} {
+                            font-size: 16px;
+                            line-height: 26px;
+                        }
 
-                        &:hover {
-                            color: $theme-color-2;
+                        & a {
+                            color: $black;
+
+                            &:hover {
+                                color: $theme-color-2;
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
 </style>

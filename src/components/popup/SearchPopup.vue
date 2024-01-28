@@ -4,67 +4,57 @@
             <div class=" container mt-60">
                 <div class="row">
                     <div class=" col-6">
-                        <img src="../../assets/images/logo-4.png" alt=""> <!-- search title -->
+                        <img src="../../assets/images/logo-4.png" alt="logo">
                     </div>
                     <div class=" col-6">
-                        <div class="binduz-er-news-search-close float-end"
-                            @click="closeSearchPopup"
-                        >
-                            <button class="binduz-er-news-search-close-btn d-flex align-items-center"
-                            >Close <span></span><span></span></button>
-                        </div> <!-- search close -->
+                        <div class="binduz-er-news-search-close float-end" @click="$emit('closeSearchPopup')">
+                            <button class="binduz-er-news-search-close-btn d-flex align-items-center">Close
+                                <span></span><span></span>
+                            </button>
+                        </div>
                     </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- search header -->
+                </div>
+            </div> 
+        </div> 
         <div class="binduz-er-news-search-body">
             <div class="container">
                 <div class="row">
                     <div class=" col-lg-12">
                         <div class="binduz-er-news-search-form">
                             <form action="#">
-                                <input type="search" placeholder="Search for Item"
-                                    v-model="searchValue"
-                                    @input="onUserChange"
-                                >
-                                <button @click="search">
+                                <input type="search" placeholder="Search for Item" v-model="searchValue" @input="onUserChange">
+                                <button @click.prevent="search">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </form>
                         </div>
                     </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- search body -->
+                </div>
+            </div> 
+        </div> 
     </div>
 </template>
 
 <script>
-// import SearchResult from '../SearchResult.vue';
-export default {
-    name: 'SearchPopup',
-    data(){
-        return{
-            searchValue:'',
-        }
-    },
-    methods: {
-        closeSearchPopup(){
-            this.$emit('closeSearchPopup');
+    export default {
+        name: 'SearchPopup',
+        data(){
+            return{
+                searchValue:'',
+            }
         },
-        search(e){
-            this.$emit('goSearch', this.searchValue);
-            e.preventDefault();
-            this.closeSearchPopup();
-            this.searchValue = '';
-        }
-    },
-}
+        methods: {
+            search(){
+                this.$emit('goSearch', this.searchValue);
+                this.$emit('closeSearchPopup');
+                this.searchValue = '';
+            }
+        },
+    }
 </script>
 
 <style lang="scss">
 @import '@/assets/styles/styles.scss';
-
 
 .binduz-er-news-search-box {
     position: fixed;
@@ -78,10 +68,10 @@ export default {
     @include transition(0.6s);
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.04);
 
-    & .binduz-er-news-search-header {
+    .binduz-er-news-search-header {
         padding-top: 10vh;
-        & .binduz-er-news-search-close {
-            & button {
+        .binduz-er-news-search-close {
+            button {
                 background: none;
                 border: 0;
                 font-size: 24px;
@@ -90,7 +80,7 @@ export default {
                 padding-right: 35px;
                 position: relative;
 
-                & span {
+                span {
                     width: 21px;
                     height: 2px;
                     background-color: $white;
@@ -112,17 +102,17 @@ export default {
         }
     }
 
-    & .binduz-er-news-search-body {
+    .binduz-er-news-search-body {
         position: absolute;
         top: 50%;
         left: 0;
         width: 100%;
         @include transform(translateY(-50%));
 
-        & .binduz-er-news-search-form {
+        .binduz-er-news-search-form {
             position: relative;
 
-            & input {
+            input {
                 width: 100%;
                 border: 0;
                 height: 80px;
@@ -138,7 +128,7 @@ export default {
                 }
             }
 
-            & button {
+            button {
                 position: absolute;
                 right: 20px;
                 top: 50%;
@@ -152,20 +142,20 @@ export default {
         }
     }
 
-    & .binduz-er-news-search-footer {
+    .binduz-er-news-search-footer {
         padding-bottom: 50px;
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
 
-        & .binduz-er-news-search-footer-content {
-            & h4 {
+        .binduz-er-news-search-footer-content {
+            h4 {
                 color: #707070;
                 font-size: 24px;
             }
 
-            & p {
+            p {
                 color: $black;
                 font-size: 16px;
             }
