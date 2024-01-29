@@ -74,23 +74,15 @@
     </div>
 </template>
 
-<script>
-
-import axios from 'axios';
-
-export default {
-    name: 'NewsLetter',
-    data(){
-        return{
-            letterNews:[],
-        }
-    },
-    mounted(){
+<script setup>
+    import { ref, onMounted } from 'vue';
+    import axios from 'axios';
+    const letterNews = ref([]);
+    onMounted(() => {
         axios
         .get('https://newsapi.org/v2/everything?q=Technology&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.letterNews = response.data.articles));
-    }
-}
+        .then(response => (letterNews.value = response.data.articles));
+    })
 </script>
 
 <style lang="scss">

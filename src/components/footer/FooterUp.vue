@@ -95,52 +95,49 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'FooterUp',
-}
+<script setup>
+
 </script>
 
 <style lang="scss">
     @import "@/assets/styles/styles.scss";
 
     .binduz-er-footer-area {
-    padding-top: 75px;
-    margin-top: 60px;
-    padding-bottom: 60px;
-    background: $black;
-    position: relative;
-    z-index: 10;
-    overflow: hidden;
+        padding-top: 75px;
+        margin-top: 60px;
+        padding-bottom: 60px;
+        background: $black;
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
 
+        &::before {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background: #111111;
 
-    &::before {
-        position: absolute;
-        z-index: -1;
-        content: '';
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 30%;
-        background: #111111;
+            @media #{$laptop} {
+                width: 23%;
+            }
 
-        @media #{$laptop} {
-            width: 23%;
-        }
+            @media #{$lg} {
+                width: 26%;
+            }
 
-        @media #{$lg} {
-            width: 26%;
-        }
+            @media #{$md} {
+                width: 0%;
+            }
 
-        @media #{$md} {
-            width: 0%;
-        }
-
-        @media #{$xs} {
-            width: 0%;
+            @media #{$xs} {
+                width: 0%;
+            }
         }
     }
-}
 
 
 .binduz-er-footer-widget-style-1 {
@@ -164,8 +161,8 @@ export default {
         margin-right: 0;
     }
 
-    & .binduz-er-footer-title {
-        & .binduz-er-title {
+    .binduz-er-footer-title {
+        .binduz-er-title {
             &::before {
                 width: 56%;
 

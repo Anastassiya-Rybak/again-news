@@ -48,39 +48,21 @@
 
 </template>
 
-<script>
-import axios from 'axios';
-
-export default {
-    props: 
-    {
+<script setup>
+    import { ref, onMounted, computed, defineProps } from 'vue';
+    import axios from 'axios';
+    const props = defineProps({
         showResultInfo: { type: String },
-    },
-    name: 'SearchResult',
-    data(){
-        return{
-            news: [],
-        }
-    },
-    methods: {
-        sortResult(){
-        }
-    },
-    computed: {
-        sortingResult(){
-            return this.news.filter(elem => {
-                return elem.description.includes(this.showResultInfo)
-                }
-            )
-        }
-    },
-    mounted(){
+    })
+    const news = ref([]);
+    const sortingResult = computed(() => {
+        return news.value.find(elem => { elem.description.includes(props.showResultInfo); })
+    });
+    onMounted(() => {
         axios
-        .get('https://newsapi.org/v2/everything?q=everything&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.news = response.data.articles));
-    }
-
-}
+            .get('https://newsapi.org/v2/everything?q=everything&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+            .then(response => (news.value = response.data.articles));
+    })
 </script>
 
 <style lang="scss">

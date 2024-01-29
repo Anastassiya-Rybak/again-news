@@ -53,13 +53,10 @@
     </div>
 </template>
 
-<script>
+<script setup>
     import axios from 'axios';
-    export default {
-        name: 'CategoryLine',
-        data(){
-            return {
-                categories: [
+    import { ref, onMounted } from 'vue';
+    const categories = ref([
                     {
                         name: 'Breaking News',
                         content: [],
@@ -95,27 +92,23 @@
                         content: [],
                         link: 'https://newsapi.org/v2/everything?q=Gaming&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6'
                     }
-                ],
-                activeTab: 0,
-            }
-        },
-        methods: {
-            chooseCateg (index) {
-                this.activeTab = index;
-                this.getContent();
-            },
-            async getContent(){
-                if (this.categories[this.activeTab].lenght !== 0) {
-                    axios
-                        .get(this.categories[this.activeTab].link)
-                        .then(response => (this.categories[this.activeTab].content = response.data.articles));
-                }
-            }
-        },
-        mounted() {
-            this.getContent()
-        },
+                ]);
+    const activeTab = ref(0);
+
+    const chooseCateg = (index) => {
+        activeTab.value = index;
+        getContent();
+    };
+    const getContent = async() => {
+        if (categories.value[activeTab.value].lenght !== 0) {
+            axios
+                .get(categories.value[activeTab.value].link)
+                .then(response => (categories.value[activeTab.value].content = response.data.articles));
+        }
     }
+    onMounted(() => {
+        getContent();    
+    });
 </script>
 
 <style lang="scss">
@@ -133,9 +126,9 @@
         margin-top: 40px;
         margin-bottom: 40px;
 
-        & ul {
-            & li {
-                & a {
+        ul {
+            li {
+                a {
                     background-color: $white !important;
                     color: $text-color !important;
                     border-radius: 0 !important;
@@ -148,7 +141,7 @@
                         margin: 0 2px 4px;
                     }
 
-                    &.active {
+                    .active {
                         color: #fff !important;
                         background-color: $theme-color-2 !important;
                     }
@@ -159,7 +152,7 @@
 
     .binduz-er-news-categories-box {
         margin-bottom: 40px;
-        & .binduz-er-news-categories-item {
+        .binduz-er-news-categories-item {
             background: $white;
             padding: 30px;
             display: -webkit-flex;
@@ -179,7 +172,7 @@
                 display: block;
             }
 
-            & .binduz-er-thumb {
+            .binduz-er-thumb {
                 min-width: 120px;
                 max-width: 120px;
                 overflow: hidden;
@@ -190,7 +183,7 @@
                         max-width: 100%;
                     }
 
-                & img {
+                img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
@@ -203,16 +196,16 @@
                 }
             }
 
-            & .binduz-er-content {
-                & .binduz-er-meta-date {
-                    & span {
+            .binduz-er-content {
+                .binduz-er-meta-date {
+                    span {
                         color: #666;
                         font-size: 14px;
                     }
                 }
 
-                & .binduz-er-news-categories-title {
-                    & .binduz-er-title {
+                .binduz-er-news-categories-title {
+                    .binduz-er-title {
                         margin-bottom: 0;
                         font-size: 20px;
                         line-height: 30px;
@@ -221,7 +214,7 @@
                             line-height: 26px;
                         }
 
-                        & a {
+                        a {
                             color: $black;
 
                             &:hover {
