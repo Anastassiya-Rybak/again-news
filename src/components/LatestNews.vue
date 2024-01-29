@@ -88,32 +88,23 @@
     </div>
 </template>
 
-<script>
+<script setup>
+    import { ref, onMounted } from 'vue';
+    import axios from 'axios';
 
-import axios from 'axios';
-
-export default {
-    name: 'LatestNews',
-    data() {
-        return {
-            lastNews: [],
-            videoNews: []
-        }
-    },
-    mounted(){
+    const lastNews = ref([]);
+    const videoNews = ref([]);
+    onMounted(() => {
         axios
-        .get('https://newsapi.org/v2/everything?q=Technology&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.lastNews = response.data.articles));
+            .get('https://newsapi.org/v2/everything?q=Technology&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+            .then(response => (lastNews.value = response.data.articles));
         axios
-        .get('https://newsapi.org/v2/everything?q=video&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-        .then(response => (this.videoNews = response.data.articles));
-
-    }
-}
+            .get('https://newsapi.org/v2/everything?q=video&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+            .then(response => (videoNews.value = response.data.articles));
+    });
 </script>
 
 <style lang="scss">
-@import '../assets/styles/styles.scss';
 
 .binduz-er-latest-news-area{
     padding-bottom: 60px;

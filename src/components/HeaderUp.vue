@@ -4,7 +4,7 @@
         <SearchPopup 
             v-if="searchWindowVisible"
             @closeSearchPopup="closeWindowSearch"
-            @goSearch="addSearchInfo"
+            @goSearch="$emit('addSearchInfo')"
         />
     </transition>
     <MenuPopup 
@@ -66,56 +66,39 @@
   </div>
 </template>
 
-<script>
-import SearchPopup from './popup/SearchPopup.vue';
-import MenuPopup from './popup/MenuPopup.vue';
-import axios from 'axios';
+<script setup>
+    import axios from 'axios';
+    import { ref, onMounted } from 'vue';
 
-export default {
-   name: 'HeaderUp', 
-   components: {
-    SearchPopup,
-    MenuPopup
-   },
-   data(){
-    return{
-        searchWindowVisible: false,
-        menuWindowVisible: false,
-        weather:[]
-    }
-   },
-    methods: {
-        closeWindowSearch(){
-            this.searchWindowVisible = false;
-        },
-        closeWindowMenu(){
-            this.menuWindowVisible =false;
-        },
-        toRound(ele){
-            let tempUnform = ele - 273;
-            let temp = Math.round(tempUnform);
-            return temp;
-        },
-        toRoundF(ele){
-            let tempUnform = (ele - 273) * 9 / 5 + 32;
-            let temp = Math.round(tempUnform);
-            return temp;
-        },
-        addSearchInfo(searchInfo){
-            this.$emit('addSearchInfo', searchInfo);
-        }
+    const searchWindowVisible = ref(false);
+    const menuWindowVisible = ref(false);
+    const weather = ref([]);
 
-    },
-    mounted(){
+    const closeWindowSearch = () => {
+        searchWindowVisible.value = false;
+    };
+    const closeWindowMenu = () => {
+        menuWindowVisible.value = false;
+    };
+    const toRound = (ele) => {
+        let tempUnform = ele - 273;
+        let temp = Math.round(tempUnform);
+        return temp;
+    };
+    const toRoundF = (ele) => {
+        let tempUnform = (ele - 273) * 9 / 5 + 32;
+        let temp = Math.round(tempUnform);
+        return temp;
+    };
+
+    onMounted(() => {
         axios
         .get ('http://api.openweathermap.org/data/2.5/weather?q=Karaganda&appid=0aba706e4dcac03de2493c0fa21fd9cf')
-        .then (response => (this.weather = response.data.main.temp));
-    }
-}
+        .then (response => (weather.value = response.data.main.temp));
+    })
 </script>
 
 <style lang="scss">
-@import '../assets/styles/styles.scss';
 
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;

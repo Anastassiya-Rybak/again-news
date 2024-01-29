@@ -152,7 +152,6 @@
 </script>
 
 <style lang="scss">
-    @import '@/assets/styles/styles.scss';
 
     .binduz-er-news-off_canvars_overlay {
         width: 100%;

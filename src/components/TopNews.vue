@@ -113,38 +113,22 @@
     </div>
 </template>
 
-<script>
-    import { Swiper, SwiperSlide } from 'swiper/vue';
-    import {Autoplay, Navigation} from 'swiper';
+<script setup>
+    import { onMounted, ref } from 'vue';
     import '../../node_modules/swiper/swiper.scss';
     import '../../node_modules/swiper/modules/navigation/navigation.scss';
 
     import axios from 'axios';
 
-export default {
-    name: "TopNews",
-    components: { Swiper, SwiperSlide },
-    setup() {
-      return {
-        modules: [Autoplay, Navigation],
-      };
-    },
-    data() {
-        return {
-            slides: [],
-        }
-    },
-    mounted() {
+    const slides = ref([]);
+    onMounted(() => {
         axios
             .get('https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-            .then(response => (this.slides = response.data.articles));
-    },
-
-}
+            .then(response => (slides.value = response.data.articles));
+    });
 </script>
 
 <style lang="scss">
-    @import '@/assets/styles/styles.scss';
     .binduz-er-top-news-area{
     margin-top: 60px;
     padding-bottom: 60px;

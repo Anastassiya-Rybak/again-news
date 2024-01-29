@@ -54,7 +54,6 @@
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/styles.scss';
 
 .binduz-er-news-search-box {
     position: fixed;

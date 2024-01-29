@@ -44,20 +44,11 @@
     </div>
 </template>
 
-<script>
-
-export default {
-    name: 'RecentlyViewed',
-    data(){
-        return{
-            recentlyNews:[],
-        }
-    }
-}
+<script setup>
+    const recentlyNews = [];
 </script>
 
 <style lang="scss">
-    @import "@/assets/styles/styles.scss";
 
 
 </style>

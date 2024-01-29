@@ -71,53 +71,18 @@
     </div>
 </template>
 
-<script>
-    import { Swiper, SwiperSlide } from 'swiper/vue';
-    import {Autoplay, Navigation, Thumbs} from 'swiper';
-    import '../../node_modules/swiper/swiper.scss';
-    import "../../node_modules/swiper/modules/navigation/navigation.scss";
-    import "../../node_modules/swiper/modules/thumbs/thumbs.scss";
-
-    // SwiperCore.use([Thumbs]);
-
+<script setup>
     import axios from 'axios';
-
-export default {
-    name: 'NewsSlider',
-    components: {
-      Swiper,
-      SwiperSlide,
-    },
-    setup() {
-        return {
-            modules: [Autoplay, Navigation, Thumbs],
-        };
-    },
-    data() {
-        return {
-            slides: 
-            [],
-            // thumbsSwiper: null,
-        }
-    },
-    mounted() {
+    import { ref, onMounted } from 'vue';
+    const slides = ref([]);
+    onMounted(() => {
         axios
             .get('https://newsapi.org/v2/everything?q=Technology&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-            .then(response => (this.slides = response.data.articles));
-    },
-    // methods: {
-    //     setThumbsSwiper(swiper) {
-    //         this.thumbsSwiper = swiper;
-    //     },
-    // }
-
-}
+            .then(response => (slides.value = response.data.articles));
+    });
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/styles.scss';
-
-.binduz-er-news-slider-area{}
 
 .binduz-er-news-slider-box {
 
@@ -226,8 +191,6 @@ export default {
                     }
                 }
             }
-        }
-        .binduz-er-news-slider-area {
         }
         & .binduz-er-news-slider-content {
 
