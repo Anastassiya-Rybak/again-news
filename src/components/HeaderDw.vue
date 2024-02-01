@@ -81,9 +81,7 @@
     </div>
 </template>
 
-<script setup>
-    import '../../node_modules/swiper/swiper.scss';
-    import axios from 'axios';
+<script setup> 
     import { onMounted, ref } from 'vue';
 
     const categoriesPages = [

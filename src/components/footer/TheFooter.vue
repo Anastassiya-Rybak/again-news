@@ -7,6 +7,9 @@
 </template>
 
 <script setup>
+import FooterAdd from './FooterAdd.vue';
+import FooterDw from './FooterDw.vue';
+import FooterUp from './FooterUp.vue';
 
 </script>
 

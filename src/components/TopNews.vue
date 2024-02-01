@@ -115,10 +115,7 @@
 
 <script setup>
     import { onMounted, ref } from 'vue';
-    import '../../node_modules/swiper/swiper.scss';
-    import '../../node_modules/swiper/modules/navigation/navigation.scss';
 
-    import axios from 'axios';
 
     const slides = ref([]);
     onMounted(() => {

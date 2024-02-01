@@ -67,7 +67,9 @@
 </template>
 
 <script setup>
-    import axios from 'axios';
+    // import axios from 'axios';
+    import SearchPopup from './popup/SearchPopup.vue';
+    import MenuPopup from './popup/MenuPopup.vue';
     import { ref, onMounted } from 'vue';
 
     const searchWindowVisible = ref(false);

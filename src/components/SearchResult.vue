@@ -50,7 +50,6 @@
 
 <script setup>
     import { ref, onMounted, computed, defineProps } from 'vue';
-    import axios from 'axios';
     const props = defineProps({
         showResultInfo: { type: String },
     })
