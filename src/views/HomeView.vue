@@ -3,7 +3,7 @@
     <HeaderUp 
       @addSearchInfo="readSearchInfo"
     />
-    <HeaderDw />
+    <!-- <HeaderDw />
     <SearchResult 
       :showResultInfo="transit"
     />
@@ -14,7 +14,7 @@
     <LatestNews />
     <RecentlyViewed />
     <NewsLetter />
-    <TheFooter />
+    <TheFooter /> -->
   </div>
 </template>
 

@@ -19,18 +19,14 @@
                         <ul>
                             <li>
                                 <span class="binduz-er-toggle-btn binduz-er-news-canvas_open"
-                                    @click="menuWindowVisible = !menuWindowVisible"
-                                >
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                    Menu
+                                    @click="menuWindowVisible = !menuWindowVisible">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>Menu
                                 </span>
                             </li>
                             <li>
                                 <a class="binduz-er-news-search-open" href="#"
-                                    @click="searchWindowVisible = !searchWindowVisible"
-                                >
-                                    <i class="fa fa-search" aria-hidden="true"></i> 
-                                    Search
+                                    @click.prevent="searchWindowVisible = !searchWindowVisible">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Search
                                 </a>
                             </li>
                         </ul>
@@ -42,13 +38,13 @@
                             <li>
                                 <a href="#">
                                     <i class="fa fa-cloud" aria-hidden="true"></i>
-                                     {{toRound(weather)}}°C
+                                     {{ toRound('c') }}°C
                                     </a>
                                 </li>
                             <li>
                                 <a href="#">
                                     <i class="fa fa-cloud" aria-hidden="true"></i> 
-                                    {{toRoundF(weather)}}°F
+                                    {{ toRound('f') }}°F
                                 </a>
                             </li>
                             <li>
@@ -67,14 +63,13 @@
 </template>
 
 <script setup>
-    // import axios from 'axios';
     import SearchPopup from './popup/SearchPopup.vue';
     import MenuPopup from './popup/MenuPopup.vue';
-    import { ref, onMounted } from 'vue';
+    import { ref, onBeforeMount } from 'vue';
 
     const searchWindowVisible = ref(false);
     const menuWindowVisible = ref(false);
-    const weather = ref([]);
+    const weather = ref(0);
 
     const closeWindowSearch = () => {
         searchWindowVisible.value = false;
@@ -82,22 +77,26 @@
     const closeWindowMenu = () => {
         menuWindowVisible.value = false;
     };
+
+    onBeforeMount(() => {
+        fetch('http://api.openweathermap.org/data/2.5/weather?q=Karaganda&appid=0aba706e4dcac03de2493c0fa21fd9cf')
+        .then(response => response.json())
+        .then(data => weather.value = data.main.temp)
+
+    //     navigator.geolocation.getCurrentPosition(
+    //     function(position) {
+    //         alert('Последний раз вас засекали здесь: ' +
+    //             position.coords.latitude + ", " + position.coords.longitude);
+    //     }
+    // );
+    });
+
     const toRound = (ele) => {
-        let tempUnform = ele - 273;
-        let temp = Math.round(tempUnform);
-        return temp;
-    };
-    const toRoundF = (ele) => {
-        let tempUnform = (ele - 273) * 9 / 5 + 32;
+        let tempUnform = (ele === 'c') ? weather.value - 273  : (weather.value - 273) * 9 / 5 + 32;
         let temp = Math.round(tempUnform);
         return temp;
     };
 
-    onMounted(() => {
-        axios
-        .get ('http://api.openweathermap.org/data/2.5/weather?q=Karaganda&appid=0aba706e4dcac03de2493c0fa21fd9cf')
-        .then (response => (weather.value = response.data.main.temp));
-    })
 </script>
 
 <style lang="scss">

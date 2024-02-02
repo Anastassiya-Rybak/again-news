@@ -83,6 +83,7 @@
 
 <script setup> 
     import { onMounted, ref } from 'vue';
+    import useFetch from './../composables/useFetch';
 
     const categoriesPages = [
         {
@@ -132,9 +133,10 @@
     ];
     const trendingNews = ref([]);
     onMounted(() => {
-        axios
-            .get('https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
-            .then(response => (trendingNews.value = response.data.articles));
+        // eslint-disable-next-line no-unused-vars
+        const { data, error} = useFetch('https://newsapi.org/v2/everything?q=everything&sortBy=popularity&apiKey=3dcd0ffb1adb4ee1a91e1f6fa967afa6')
+        trendingNews.value = data;
+        console.log(trendingNews.value);
     })
 </script>
 
@@ -965,9 +967,6 @@
     }
     }
 
-
-
-
     @-webkit-keyframes sticky {
     0% {
         top: -200px;
@@ -987,9 +986,6 @@
         top: 0;
     }
     }
-
-
-
 
     .binduz-er-breadcrumb-area{
     margin-bottom: 40px;
